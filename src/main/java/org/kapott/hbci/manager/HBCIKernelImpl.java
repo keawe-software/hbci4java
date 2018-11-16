@@ -48,7 +48,7 @@ import org.kapott.hbci.status.HBCIMsgStatus;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-public final class HBCIKernelImpl implements HBCIKernel
+public class HBCIKernelImpl implements HBCIKernel
 {
     public final static boolean SIGNIT=true;
     public final static boolean DONT_SIGNIT=false;
@@ -59,11 +59,11 @@ public final class HBCIKernelImpl implements HBCIKernel
     public final static boolean NEED_CRYPT=true;
     public final static boolean DONT_NEED_CRYPT=false;
     
-    private String hbciversion;      /* the HBCI version used by this kernel object */
-    private MsgGen gen;              /* an instance of a message generator */
-    private String currentMsgName;   /* name of job currently beeing created */
+    protected String hbciversion;      /* the HBCI version used by this kernel object */
+    protected MsgGen gen;              /* an instance of a message generator */
+    protected String currentMsgName;   /* name of job currently beeing created */
     
-    private IHandlerData parentHandlerData;
+    protected IHandlerData parentHandlerData;
     
     public HBCIKernelImpl(IHandlerData parentHandlerData,String hbciversion)
     {
@@ -78,6 +78,8 @@ public final class HBCIKernelImpl implements HBCIKernel
 
         ClassLoader cl=this.getClass().getClassLoader();
         String filename=xmlpath+"hbci-"+hbciversion+".xml";
+        System.out.println("Trying to load "+filename);
+        System.out.println("SyntaxStream: "+syntaxStream);
         syntaxStream=cl.getResourceAsStream(filename);
         if (syntaxStream==null)
             throw new InvalidUserDataException(HBCIUtilsInternal.getLocMsg("EXCMSG_KRNL_CANTLOAD_SYN",filename));
@@ -89,7 +91,10 @@ public final class HBCIKernelImpl implements HBCIKernel
             throw new HBCI_Exception(HBCIUtilsInternal.getLocMsg("EXCMSG_MSGGEN_INIT"),e);
         }
     }
-    
+
+    public HBCIKernelImpl() {
+    }
+
     public String getHBCIVersion()
     {
         return hbciversion;

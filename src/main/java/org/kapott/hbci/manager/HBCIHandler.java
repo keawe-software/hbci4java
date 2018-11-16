@@ -82,15 +82,15 @@ HBCIExecStatus status=handle.execute();
 
 handle.close();
 </pre> */
-public final class HBCIHandler
+public class HBCIHandler
 	implements IHandlerData
 {
     public final static int REFRESH_BPD=1;
     public final static int REFRESH_UPD=2;
     
-    private HBCIKernelImpl       kernel;
-    private HBCIPassportInternal passport;
-    private Map<String, HBCIDialog>                  dialogs;
+    protected HBCIKernelImpl       kernel;
+    protected HBCIPassportInternal passport;
+    protected Map<String, HBCIDialog>  dialogs;
     
     /** Anlegen eines neuen HBCI-Handler-Objektes. Beim Anlegen wird
         überprüft, ob für die angegebene HBCI-Version eine entsprechende
@@ -151,7 +151,10 @@ public final class HBCIHandler
         	updateMetaInfo();
         }
     }
-    
+
+    public HBCIHandler() {
+    }
+
     /**
      * Ruft die SEPA-Infos der Konten sowie die TAN-Medienbezeichnungen ab.
      * unterstuetzt wird und speichert diese Infos in den UPD.
@@ -260,7 +263,7 @@ public final class HBCIHandler
         }
     }
     
-    private void registerInstitute()
+    protected void registerInstitute()
     {
         try {
             HBCIUtils.log("registering institute",HBCIUtils.LOG_DEBUG);
@@ -271,7 +274,7 @@ public final class HBCIHandler
         }
     }
 
-    private void registerUser()
+    protected void registerUser()
     {
         try {
             HBCIUtils.log("registering user",HBCIUtils.LOG_DEBUG);

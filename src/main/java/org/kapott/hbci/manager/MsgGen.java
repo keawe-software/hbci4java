@@ -76,11 +76,12 @@ public final class MsgGen
     {
         try {
             DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
-
+            System.out.println(dbf);
             dbf.setIgnoringComments(true);
-            dbf.setValidating(true);
+            dbf.setValidating(false);
 
             DocumentBuilder db=dbf.newDocumentBuilder();
+            System.out.println(db);
             syntax=db.parse(syntaxFileStream);
             syntaxFileStream.close();
 

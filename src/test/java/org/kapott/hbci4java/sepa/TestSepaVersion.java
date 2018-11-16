@@ -12,8 +12,6 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.kapott.hbci.GV.generators.GenLastSEPA00800101;
-import org.kapott.hbci.GV.generators.GenUebSEPA00100303;
 import org.kapott.hbci.sepa.SepaVersion;
 import org.kapott.hbci.sepa.SepaVersion.Type;
 
